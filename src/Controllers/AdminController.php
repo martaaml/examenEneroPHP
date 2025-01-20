@@ -16,7 +16,6 @@ class AdminController{
         $this->mensajeService=new mensajeService();
     }
 
-
     //Funcion para iniciar sesion
     public function index(){
         $gestion=[

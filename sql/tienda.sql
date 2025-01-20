@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS `ExamenMartaPHP` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `marcaphp`;
 
 drop table if exists mensajes;
 

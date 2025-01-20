@@ -25,7 +25,7 @@ class mensajeRepository
             foreach ($productsData as $mensajeData) {
                 $mensaje[] = Mensaje::fromArray($mensajeData);
             }
-        } catch (PDOException $e) {
+        } catch (PDOException) {
             $products = null;
         }
         return $products;

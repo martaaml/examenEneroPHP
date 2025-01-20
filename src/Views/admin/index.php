@@ -69,49 +69,18 @@ $mensajes = array_slice(
         createApp({
             data() {
                 return {
-                    menu: <?php echo json_encode($menu); ?>,
-                    verCat: false,
-                    verProd: false,
-                    verPed: false,
-                    categorias: <?php echo json_encode($categorias); ?>,
-                    products: <?php echo json_encode($products); ?>,
-                    pedidos: <?php echo json_encode($pedidos); ?>,
-                    formularioCategoria: {
+                    sesion: <?php echo json_encode($_SESSION); ?>,
+                    mensajes: <?php echo json_encode($mensajes); ?>,
+
+                    formularioMensaje: {
                         id: null,
-                        nombre: ''
-                    },
-                    formularioProducto: {
-                        id: null,
-                        nombre: '',
-                        descripcion: '',
-                        precio: '',
-                        stock: '',
-                        oferta: '',
+                        de: '',
+                        asunto: '',
                         fecha: '',
-                        imagen: '',
                     }
                 }
             },
             methods: {
-                viewMenu(gestion) {
-                    switch (gestion) {
-                        case 0:
-                            this.verCat = true;
-                            this.verProd = false;
-                            this.verPed = false;
-                            break;
-                        case 1:
-                            this.verProd = true;
-                            this.verPed = false;
-                            this.verCat = false;
-                            break;
-                        case 2:
-                            this.verPed = true;
-                            this.verProd = false;
-                            this.verCat = false;
-                            break;
-                    }
-                },
                 editarCategoria(cat) {
                     this.formularioCategoria = cat;
                 },
