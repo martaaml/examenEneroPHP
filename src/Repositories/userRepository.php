@@ -27,7 +27,7 @@ class userRepository
             $this->conection->querySQL("SELECT * FROM usuarios");
             $usuariosData = $this->conection->allRegister();
             foreach ($usuariosData as $usuarioData) {
-               //$usuarios[] = UsuariosRepository::fromArray($usuarioData);
+               $usuarios[] = userRepository::fromArray($usuarioData);
             }
         } catch (PDOException) {
             $usuarios = null;
@@ -39,23 +39,18 @@ class userRepository
      * Función para registrar un nuevo usuario.
      * 
      */
-    public function register($user)
-    {
-        try {
-            $this->sql = $this->conection->prepareSQL(
-                "INSERT INTO usuarios(nombre, apellidos, email, password, rol) VALUES (:nombre, :apellidos, :email, :password, :rol)"
-            );
-            $this->sql->bindValue(":nombre", $user->getNombre());
-            $this->sql->bindValue(":apellidos", $user->getApellidos());
-            $this->sql->bindValue(":email", $user->getEmail());
-            $this->sql->bindValue(":password", $user->getPassword());
-            $this->sql->bindValue(":rol", $user->getRol());
+    public function register($email,$password) :?string{
+        try{
+            $this->sql = $this->conection->prepareSQL("INSERT INTO usuarios(correo,contrasena) VALUES (:correo,:contrasena);");      
+            $this->sql->bindValue(":correo",$email);
+            $this->sql->bindValue(":contrasena",$password);
             $this->sql->execute();
             $result = null;
-        } catch (PDOException $e) {
+        }catch(PDOException $e){
             $result = $e->getMessage();
         }
         $this->sql->closeCursor();
+        $this->sql = null;
         return $result;
     }
 
@@ -129,22 +124,15 @@ class userRepository
         return $result;
     }
 
-    /**
-     * Función para actualizar el último comentario registrado por un usuario.
-     * 
-     */
-    public function addCommit(string $usuario, string $date)
+    public static function fromArray(array $data): User
     {
-        try {
-            $this->sql = $this->conection->prepareSQL("UPDATE usuarios SET ultimo_commit = :fecha WHERE usuario = :usuario");
-            $this->sql->bindValue(":usuario", $usuario);
-            $this->sql->bindValue(":fecha", $date);
-            $this->sql->execute();
-            $result = null;
-        } catch (PDOException $e) {
-            $result = $e->getMessage();
-        }
-        $this->sql->closeCursor();
-        return $result;
+        return new User(
+            id: $data['id']??null,
+            nombre: $data['nombre']??'',
+            apellidos: $data['apellidos']??'',
+            email: $data['email']??'',
+            password: $data['password']??'',
+            rol: $data['rol']??''
+        );
     }
 }

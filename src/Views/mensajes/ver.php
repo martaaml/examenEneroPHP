@@ -16,19 +16,23 @@ $mensajes = array_slice(
     $records_per_page
 );
 ?>
-<table>
-  <tr>
-    <th>DE</th>
-    <th>ASUNTO</th>
-    <th>FECHA</th> 
-  </tr>         <!--Aqui-->
-  <?php foreach($mensajes as $mensaje): ?>
-    <tr>
-      <td><?= $mensaje['id'] ?></td>
-      <td><?= $mensaje['de'] ?></td>
-      <td><?= $mensaje['asunto'] ?></td>
-    </tr>
-  <?php endforeach; ?>
+        <table>
+        <tr>
+            <th>De</th>
+            <th>Asunto</th>
+            <th>Fecha</th>
+            <th>Operacion</th>
+        </tr>
+
+            <?php foreach ($mensajes as $mensaje) :?>
+                <tr>
+                    
+                    <td><?=$mensaje->getDe()?></td>
+                    <td><a href="<?=BASE_URL?>/detalle/<?=$mensaje->getID()?>"><?=$mensaje->getAsunto()?></a></td>
+                    <td><?=$mensaje->getFecha()?></td>
+                    <td><input type="checkbox" name="data[]" value="<?=$mensaje->getId()?>" id=""></td>
+                </tr>
+            <?php endforeach;?>
 </table>
 <?php
     $pagination->render();

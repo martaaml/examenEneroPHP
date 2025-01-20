@@ -11,7 +11,7 @@ use Controllers\MensajeController;
     class Routes{
         public static function index() {
         Router::add('GET','/',function(){
-            (new MensajeController())->index();
+            (new AuthController())->login();
         });
     
         Router::add('GET','/?page=:id',function($id){
@@ -37,19 +37,23 @@ use Controllers\MensajeController;
         Router::add('GET','/logout',function(){
             (new AuthController())->logout();
         });
-        if(isset($_SESSION['admin'])){
-            Router::add('GET','/admin',function(){
-                (new AdminController())->index();
+
+        if(isset($_SESSION['user']) && $_SESSION['user']['rol']==='admin'){
+            
+            Router::add('GET','/mensajes',function($mensaje){
+                (new MensajeController())->index($mensaje);
             });
-            Router::add('GET','/mensajes',function(){
-                (new MensajeController())->index();
+            Router::add('POST','/mensajes',function(){
+                (new MensajeController())->crear();
             });
-            Router::add('POST','/mensaje/delete',function(){
-                (new MensajeController())->delete();
+            Router::add('GET','/mensaje/ver',function($id){
+                (new MensajeController())->ver($id);
             });
-    
-        
-            Router::dispatch();
+            Router::add('GET','/mensaje/delete',function($id){
+                (new MensajeController())->eliminar($id);
+            });
         }
+        Router::dispatch();
  }
+
 }

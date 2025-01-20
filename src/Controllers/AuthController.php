@@ -70,7 +70,7 @@ use PDOException;
                 $newPassword=password_hash($user->getPassword(),PASSWORD_BCRYPT,['cost'=>4]);
                 $user->setPassword($newPassword);
                 try{
-                    $this->userService->register($user);
+                    $this->userService->register($data['email'],$newPassword);
                     $_SESSION['success']='Registro exitoso';
                     header('Location: '.BASE_URL.'login');
                     

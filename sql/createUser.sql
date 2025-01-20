@@ -1,3 +1,3 @@
-CREATE USER 'martaTienda'@'gmail.com' IDENTIFIED BY '06022014Dj*';
-GRANT ALL PRIVILEGES ON tienda.* TO 'martaTienda'@'gmail.com';
+CREATE USER 'martaExamen'@'gmail.com' IDENTIFIED BY '06022014Dj*';
+GRANT ALL PRIVILEGES ON `ExamenMarta`.* TO 'martaExamen'@'gmail.com';
 FLUSH PRIVILEGES;

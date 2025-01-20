@@ -119,7 +119,7 @@ class Mensaje
     {
         return [
             'id' => $this->id,
-            'categoria_id' => $this->de,
+            'de' => $this->de,
             'nombre' => $this->asunto,
             'descripcion' => $this->cuerpo,
             'borrado' => $this->borrado

@@ -1,32 +1,25 @@
 <?php
+
 namespace Services;
 use Repositories\mensajeRepository;
 
 class mensajeService{
-    protected mensajeRepository $mensajeRepository;
-    function __construct()
+    private mensajeRepository $repository;
+    public function __construct()
     {
-        $this->mensajeRepository = new mensajeRepository();
+        $this->repository = new mensajeRepository();
     }
-    public function allProducts()
-    {
-        return $this->mensajeRepository->findAll();
-    }   
-    public function store($mensaje)
-    {
-        return $this->mensajeRepository->store($mensaje);
+    /**
+     * Función para sacar todos los correos de un email
+     */
+    public function sacar($mail) :array {
+        return $this->repository->sacar($mail);
     }
-
-    public function delete($mensaje)
-    {
-        return $this->mensajeRepository->delete($mensaje);
+    public function find($id) {
+        return $this->repository->find($id);
     }
-    public function findActive()
-    {
-        return $this->mensajeRepository->findActive();
-    }
-    public function findById(int $id)
-    {
-        return $this->mensajeRepository->findById($id);
+    public function delete($id) {
+        return $this->repository->delete($id);
     }
 }
+

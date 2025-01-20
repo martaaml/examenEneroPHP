@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `ExamenMartaPHP` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `marcaphp`;
+CREATE DATABASE IF NOT EXISTS `ExamenMarta` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `ExamenMarta`;
 
 drop table if exists mensajes;
 
@@ -10,16 +10,12 @@ asunto varchar(100),
 cuerpo text,
 fecha date)engine=InnoDB;
 
-DROP TABLE IF EXISTS usuarios;
-CREATE TABLE IF NOT EXISTS usuarios( 
-id              int(255) auto_increment not null,
-nombre          varchar(100) not null,
-apellidos       varchar(255),
-email           varchar(255) not null,
-password        varchar(255) not null,
-CONSTRAINT pk_usuarios PRIMARY KEY(id),
-CONSTRAINT uq_email UNIQUE(email)  
-)ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+CREATE TABLE usuarios(
+    id int(4) PRIMARY KEY auto_increment,
+    correo varchar(100),
+    contrasena varchar(100),
+    CONSTRAINT uq_correo UNIQUE(correo)  
+)engine=InnoDB;
 
 INSERT INTO mensajes VALUES (null,"Jose Luis Caparros","Recursos EducaMadrid","Este es un canal de información de la Revista Digital y del Portal EducaMadrid a los profesores de la enseñanza sostenida con fondos públicos.
 Los mensajes son enviados a su cuenta profesional en 'educa.madrid.org'. Si recibe este mensaje en una cuenta personal probablemente es porque tenga redirigida su cuenta de EdudcaMadrid.
@@ -79,7 +75,3 @@ En caso de duda consultar con el jefe de departamento por si hubiera actividades
 Recordad que todavía hay huecos en el parte de guardia para añadir a más profesores, sobre todo a primeras y últimas horas.
 Las clases de recuperación para los alumnos de segundo curso se rellenarn en : P. Lectivos de docencia de alumnos con evaluación negativa o pendiente .
 Feliz retorno y un saludo.","2021-01-08");
-
-
-
-
